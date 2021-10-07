@@ -1,4 +1,4 @@
-module linalg
+module ksp
 
   use utils 
 
@@ -267,4 +267,4 @@ module linalg
     end subroutine schurGMRES
     
 
-end module linalg
+end module ksp

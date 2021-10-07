@@ -1,6 +1,6 @@
 program gmres_driver
 
-  use linalg
+  use ksp 
   use utils
 
   implicit none

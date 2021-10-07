@@ -1,9 +1,9 @@
 all: GMRES-driver schurGMRES-driver 
 
-GMRES-driver: utils.o linalg.o gmres_driver.o
+GMRES-driver: utils.o ksp.o gmres_driver.o
 	gfortran -o $@ $^
 
-schurGMRES-driver: utils.o linalg.o schur_driver.o
+schurGMRES-driver: utils.o ksp.o schur_driver.o
 	gfortran -o $@ $^
 
 %.o %.mod: %.f90

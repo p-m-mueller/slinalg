@@ -1,7 +1,7 @@
 program schurGMRES_driver
 
   use utils
-  use linalg
+  use ksp 
 
   implicit none 
 
