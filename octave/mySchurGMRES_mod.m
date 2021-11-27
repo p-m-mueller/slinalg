@@ -1,4 +1,4 @@
-function [x, y, iter, res] = mySchurGMRES(A, b1, b2, b3, b4, f, g, x, y, maxIter, tol)
+function [x, y, iter, res] = mySchurGMRES_mod(A, b1, b2, b3, b4, f, g, x, y, maxIter, tol)
     
   n = 4;
   na = size(A)(1);
@@ -99,8 +99,9 @@ function [x, y, iter, res] = mySchurGMRES(A, b1, b2, b3, b4, f, g, x, y, maxIter
  
   % u = f - B * y;
   for i = 1:na
-    u(i) = f(i) - b1(i) * y(1) - b2(i) * y(2) - b3(i) - y(3) - b4(i) * y(4);
+    u(i) = f(i) - b1(i) * y(1) - b2(i) * y(2) - b3(i) * y(3) - b4(i) * y(4);
   endfor
+  u
   [x, iter2, res2] = myGMRES(A, u, x, na, tol);
-    
+
 endfunction

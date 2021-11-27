@@ -12,8 +12,8 @@ module ksp
       double precision, intent(in) :: A(:,:)
       double precision, intent(in) :: b(:)
       double precision, intent(in out) :: x(:)
-      integer, intent(in) :: maxIter
-      double precision, intent(in) :: tol
+      integer, intent(in out) :: maxIter
+      double precision, intent(in out) :: tol
 
       double precision, allocatable :: Q(:,:), H(:,:)
       double precision, allocatable :: r(:), c(:), beta(:), y(:)
@@ -33,9 +33,10 @@ module ksp
       if (verbose) then
         write(*,*)
         write(*,'(A)')       '---------------------------------------'
-        write(*,'(A,E10.3)') 'atol:     ', tol 
-        write(*,'(A,E10.3)') 'rtol:     ', reltol 
-        write(*,'(A,I0)')    'Max iter: ', maxIter
+        write(*,'(A20,I0,A3,I0)')  'Matrix size: ', n, ' x ', n
+        write(*,'(A20,E10.3)')     'atol:     ', tol 
+        write(*,'(A20,E10.3)')     'rtol:     ', reltol 
+        write(*,'(A20,I10)')       'Max iter: ', maxIter
         write(*,'(A)')       '---------------------------------------'
       end if
 
@@ -92,10 +93,13 @@ module ksp
           if (res <= reltol .or. j >= maxIter) exit
           j = j + 1
         end do
-       
+      
+        maxIter = j
+        tol = res 
         if (verbose) then  
           write(*,'(A)')       '---------------------------------------'
-          write(*,'(A,I0,A)')  "GMRES exit after ", j, " iterations"
+          write(*,'(A,I0,A)')  'GMRES exit after ', j, ' iterations'
+          write(*,'(A,E16.7)') 'with residual ', res
           write(*,'(A)')       '---------------------------------------'
           write(*,*)
         end if
